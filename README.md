@@ -66,7 +66,7 @@ Bahasa ini dibuat dengan tujuan menghadirkan pendekatan alternatif dalam mempela
 
 # 🔤 Variabel
 
-PAHAT menggunakan sintaks sederhana untuk membuat variabel dengan operator penugasan `=`[cite: 1, 2]. Penulisan baris dieksekusi dengan diakhiri tanda titik koma `;`[cite: 1, 2].
+PAHAT menggunakan sintaks sederhana untuk membuat variabel dengan operator penugasan `=`. Penulisan baris dieksekusi dengan diakhiri tanda titik koma `;`.
 
 ```pahat
 nama = "Syahdan";
@@ -96,7 +96,7 @@ PAHAT mendukung beberapa tipe data dasar:
 
 ## INTEGER
 
-Bilangan bulat (mencakup angka `0-9`)[cite: 1, 2].
+Bilangan bulat (mencakup angka `0-9`).
 
 ```pahat
 umur = 20;
@@ -106,7 +106,7 @@ jumlah = 100;
 
 ## FLOAT
 
-Bilangan desimal yang dipisahkan tanda titik `.`[cite: 1, 2].
+Bilangan desimal yang dipisahkan tanda titik `.`.
 
 ```pahat
 tinggi = 170.5;
@@ -116,7 +116,7 @@ nilai = 98.75;
 
 ## STRING
 
-Teks menggunakan tanda kutip ganda (`"..."`) atau kutip tunggal (`'...'`)[cite: 1, 2]. Mendukung *escape sequence* seperti `\n`, `\t`, `\r`, `\"`, dan `\'`[cite: 2].
+Teks menggunakan tanda kutip ganda (`"..."`) atau kutip tunggal (`'...'`). Mendukung *escape sequence* seperti `\n`, `\t`, `\r`, `\"`, dan `\'`.
 
 ```pahat
 nama = "Syahdan";
@@ -126,10 +126,10 @@ pesan = 'Halo Dunia!';
 
 ## BOOLEAN
 
-Nilai logika menggunakan kata kunci literal[cite: 1, 2]:
+Nilai logika menggunakan kata kunci literal:
 
-* `true` / `benar` (bernilai true)[cite: 1, 2]
-* `false` / `salah` (bernilai false)[cite: 1, 2]
+* `true` / `benar` (bernilai true)
+* `false` / `salah` (bernilai false)
 
 ```pahat
 aktif = true;
@@ -139,7 +139,7 @@ selesai = false;
 
 ## NULL
 
-PAHAT menggunakan `nol` sebagai representasi nilai kosong[cite: 1, 2].
+PAHAT menggunakan `nol` sebagai representasi nilai kosong.
 
 ```pahat
 data = nol;
@@ -161,7 +161,7 @@ data = nol;
 | `%` | Modulo (Sisa Bagi) | `a % b` |
 | `**` | Pangkat (Exponentiation) | `a ** b` |
 
-[cite: 1, 2]
+
 
 Contoh:
 
@@ -189,7 +189,7 @@ cetak(a ** b);  // 1000
 | `<=` | Lebih kecil atau sama |
 | `>=` | Lebih besar atau sama |
 
-[cite: 1, 2]
+
 
 Contoh:
 
@@ -211,7 +211,7 @@ cetak(umur < 30);
 | `^` | XOR |
 | `!` | NOT (Negasi) |
 
-[cite: 1, 2]
+
 
 Contoh:
 
@@ -228,7 +228,7 @@ cetak(!a);
 
 ## Increment dan Decrement
 
-PAHAT mendukung increment (`++`) dan decrement (`--`)[cite: 1, 2]:
+PAHAT mendukung increment (`++`) dan decrement (`--`):
 
 ```pahat
 angka = 10;
@@ -245,7 +245,7 @@ cetak(angka); // 10
 
 # 🖨️ Input dan Output
 
-Untuk menampilkan nilai ke layar digunakan fungsi `cetak()`[cite: 1, 2].
+Untuk menampilkan nilai ke layar digunakan fungsi `cetak()`.
 
 ```pahat
 cetak("Halo Dunia!");
@@ -258,7 +258,7 @@ cetak(10 + 20);
 
 # 🔀 Percabangan
 
-PAHAT menggunakan kata kunci `jika` untuk mengevaluasi kondisi dan `lainnya` untuk alternatif kondisi[cite: 1, 2].
+PAHAT menggunakan kata kunci `jika` untuk mengevaluasi kondisi dan `lainnya` untuk alternatif kondisi.
 
 ```pahat
 umur = 20;
@@ -292,7 +292,7 @@ jika (nilai >= 90) {
 
 ## `selama`
 
-Perulangan berbasis kondisi (mirip `while`)[cite: 1, 2].
+Perulangan berbasis kondisi (mirip `while`).
 
 ```pahat
 angka = 1;
@@ -306,7 +306,7 @@ selama (angka <= 5) {
 
 ## `ulang`
 
-Perulangan berbasis iterasi terstruktur (mirip `for`)[cite: 1, 2].
+Perulangan berbasis iterasi terstruktur (mirip `for`).
 
 ```pahat
 ulang (i = 0; i <= 4; i++) {
@@ -317,7 +317,7 @@ ulang (i = 0; i <= 4; i++) {
 
 ## Hentikan Iterasi (`hentikan`)
 
-Gunakan kata kunci `hentikan` untuk menghentikan perulangan secara paksa (mirip `break`)[cite: 2].
+Gunakan kata kunci `hentikan` untuk menghentikan perulangan secara paksa (mirip `break`).
 
 ```pahat
 ulang (i = 1; i <= 10; i++) {
@@ -333,7 +333,7 @@ ulang (i = 1; i <= 10; i++) {
 
 # 🔀 Pilihan Kondisi (Switch Case)
 
-PAHAT mendukung struktur kontrol keputusan menggunakan kata kunci `pilih`, `kasus`, dan `bawaan`[cite: 2].
+PAHAT mendukung struktur kontrol keputusan menggunakan kata kunci `pilih`, `kasus`, dan `bawaan`.
 
 ```pahat
 pilihan = 2;
@@ -356,7 +356,7 @@ pilih (pilihan) {
 
 # 📦 Array
 
-Array di PAHAT didefinisikan menggunakan kurung siku `[...]`[cite: 1, 2]. Elemen diakses berdasarkan indeks berbasis 0[cite: 1, 2].
+Array di PAHAT didefinisikan menggunakan kurung siku `[...]`. Elemen diakses berdasarkan indeks berbasis 0.
 
 ```pahat
 angka = [10, 20, 30, 40, 50];
@@ -382,7 +382,7 @@ cetak(matrix[0][1]); // 2
 
 # 🗂️ Object
 
-PAHAT mendukung **object literal** untuk menyimpan pasang *key-value* menggunakan kurung kurawal `{...}`[cite: 1, 2]. *Key* berupa identifier atau string[cite: 2].
+PAHAT mendukung **object literal** untuk menyimpan pasang *key-value* menggunakan kurung kurawal `{...}`. *Key* berupa identifier atau string.
 
 ```pahat
 pengguna = {
@@ -393,7 +393,7 @@ pengguna = {
 
 ```
 
-Nilai object dapat diakses menggunakan **notasi bracket** (`["key"]`) maupun **notasi titik** (`.key`)[cite: 1, 2]:
+Nilai object dapat diakses menggunakan **notasi bracket** (`["key"]`) maupun **notasi titik** (`.key`):
 
 ```pahat
 cetak(pengguna["nama"]);
@@ -413,7 +413,7 @@ pengguna["aktif"] = false;
 
 # 🧾 JSON
 
-PAHAT memiliki modul bawaan standar untuk pengolahan JSON[cite: 1, 2]:
+PAHAT memiliki modul bawaan standar untuk pengolahan JSON:
 
 * `baca_json(string_json)` — Mengubah string JSON menjadi objek/array PAHAT.
 
@@ -441,7 +441,7 @@ cetak(json_str);
 
 # ⚙️ Fungsi
 
-Fungsi dideklarasikan menggunakan kata kunci `fungsi`[cite: 1, 2]. Nilai dapat dikembalikan menggunakan kata kunci `kembalikan`[cite: 1, 2].
+Fungsi dideklarasikan menggunakan kata kunci `fungsi`. Nilai dapat dikembalikan menggunakan kata kunci `kembalikan`.
 
 ```pahat
 fungsi tambah(a, b) {
@@ -457,18 +457,18 @@ cetak(hasil); // 30
 
 # 📦 Modul
 
-PAHAT mendukung modularisasi kode dengan membagi berkas ke dalam ekstensi `.pahat`[cite: 1, 2].
+PAHAT mendukung modularisasi kode dengan membagi berkas ke dalam ekstensi `.pahat`.
 
 ## Mengimpor Modul
 
-Gunakan kata kunci `impor` diikuti dengan nama berkas/modul (tanpa ekstensi)[cite: 1, 2]:
+Gunakan kata kunci `impor` diikuti dengan nama berkas/modul (tanpa ekstensi):
 
 ```pahat
-impor matematika;
+impor "modul/matematika";
 
 ```
 
-Pemanggilan fungsi dari modul menggunakan format `nama_modul.nama_fungsi()`[cite: 1, 2]:
+Pemanggilan fungsi dari modul menggunakan format `nama_modul.nama_fungsi()`:
 
 ```pahat
 hasil = matematika.tambah(10, 20);
@@ -480,7 +480,7 @@ cetak(hasil);
 
 # 💬 Komentar
 
-PAHAT mendukung dua gaya penulisan komentar[cite: 1, 2]:
+PAHAT mendukung dua gaya penulisan komentar:
 
 ```pahat
 // Komentar satu baris
