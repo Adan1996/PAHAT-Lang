@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico">
+    <title>PAHAT Programming Language - Documentation Guide</title>
+    <!-- Font Inter & Fira Code untuk tampilan modern & developer-friendly -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+
+    <button class="mobile-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar">
+        <div class="brand">
+            <div class="brand-logo">
+                <img src="./assets/img/pahat.jpg" alt="" width="40">
+            </div>
+            <div>
+                <div class="brand-title">PAHAT</div>
+                <div class="brand-subtitle">v1.2.0 Docs</div>
+            </div>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">Pengenalan</div>
+            <ul class="nav-links">
+                <li><a href="#tentang"><i class="fa-solid fa-circle-info"></i> Tentang PAHAT</a></li>
+                <li><a href="#metadata"><i class="fa-solid fa-table-list"></i> Metadata</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">Dasar Bahasa</div>
+            <ul class="nav-links">
+                <li><a href="#variabel"><i class="fa-solid fa-code"></i> Variabel</a></li>
+                <li><a href="#tipe-data"><i class="fa-solid fa-cubes"></i> Tipe Data</a></li>
+                <li><a href="#operator"><i class="fa-solid fa-calculator"></i> Operator</a></li>
+                <li><a href="#input-output"><i class="fa-solid fa-terminal"></i> Input & Output</a></li>
+                <li><a href="#komentar"><i class="fa-solid fa-comment"></i> Komentar</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">Kontrol Alur</div>
+            <ul class="nav-links">
+                <li><a href="#percabangan"><i class="fa-solid fa-code-branch"></i> Percabangan</a></li>
+                <li><a href="#perulangan"><i class="fa-solid fa-rotate-right"></i> Perulangan</a></li>
+                <li><a href="#switch"><i class="fa-solid fa-sliders"></i> Switch Case</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">Struktur Data & Fungsi</div>
+            <ul class="nav-links">
+                <li><a href="#array"><i class="fa-solid fa-list-ol"></i> Array</a></li>
+                <li><a href="#object"><i class="fa-solid fa-box"></i> Object</a></li>
+                <li><a href="#json"><i class="fa-solid fa-file-code"></i> JSON</a></li>
+                <li><a href="#fungsi"><i class="fa-solid fa-gear"></i> Fungsi</a></li>
+                <li><a href="#modul"><i class="fa-solid fa-puzzle-piece"></i> Modul</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">Standard Library</div>
+            <ul class="nav-links">
+                <li><a href="#core-builtin"><i class="fa-solid fa-microchip"></i> Core Builtin</a></li>
+                <li><a href="#std-math"><i class="fa-solid fa-square-root-variable"></i> Math</a></li>
+                <li><a href="#std-string"><i class="fa-solid fa-font"></i> String</a></li>
+                <li><a href="#std-file"><i class="fa-solid fa-folder-open"></i> File</a></li>
+                <li><a href="#std-os"><i class="fa-solid fa-desktop"></i> OS</a></li>
+                <li><a href="#std-time"><i class="fa-solid fa-clock"></i> Time</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">Lainnya</div>
+            <ul class="nav-links">
+                <li><a href="#contoh-lengkap"><i class="fa-solid fa-laptop-code"></i> Contoh Lengkap</a></li>
+                <li><a href="#ringkasan"><i class="fa-solid fa-book-open"></i> Ringkasan Fitur</a></li>
+                <li><a href="#lisensi"><i class="fa-solid fa-certificate"></i> Lisensi</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+        <div class="hero">
+            <img src="./assets/img/header.jpg" alt="PAHAT Logo" class="hero-logo">
+
+            <span class="hero-badge">Documentation Guide v1.2.0</span>
+            <h1>🚀 PAHAT Programming Language</h1>
+            <p><strong>PAHAT (Pemrograman Analitis Berbasis Heuristik dan Arsitektur Terpadu)</strong> adalah bahasa pemrograman <strong>expressive & lightweight</strong> dengan sintaks intuitif berbasis bahasa Indonesia.</p>
+            
+            <!-- Container Tombol Download -->
+            <div class="download-container">
+                <a href="https://github.com/Adan1996/PAHAT-Lang/releases/download/v1.2.0/pahat-windows-x86_64.zip" class="btn-download btn-windows" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-windows"></i> Download for Windows
+                </a>
+                <a href="https://github.com/Adan1996/PAHAT-Lang/releases/download/v1.2.0/pahat-linux-x86_64.tar.gz" class="btn-download btn-linux" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-linux"></i> Download for Linux
+                </a>
+            </div>
+        </div>
+
+        <!-- Section Syarat & Ketentuan Sistem (Pre-requisites) -->
+        <section class="prerequisites">
+            <h2>Prasyarat Sistem (Pre-requisites)</h2>
+            <p>Sebelum menjalankan interpreter PAHAT-Lang, pastikan sistem Anda memenuhi kebutuhan berikut:</p>
+            
+            <ul>
+                <li><strong>Sistem Operasi:</strong> Windows 10/11 (64-bit) atau Linux (Ubuntu 20.04+/Debian).</li>
+                <li><strong>Terminal/CLI:</strong> Akses ke Command Prompt, PowerShell, atau Terminal Linux untuk mengeksekusi biner interpreter.</li>
+            </ul>
+        </section>
+
+        <!-- Tentang PAHAT -->
+        <section id="tentang">
+            <h2>👨‍💻 Tentang PAHAT</h2>
+            <p><strong>PAHAT</strong> dibuat oleh <strong>Syahdan Masyhuri</strong> sebagai bahasa pemrograman yang berfokus pada kesederhanaan sintaks, keterbacaan, dan pengalaman pemrograman yang dekat dengan bahasa Indonesia.</p>
+            <p>PAHAT berusaha menghadirkan pengalaman pemrograman yang <strong>ringan, ekspresif, dan mudah dipahami</strong>, tanpa menghilangkan konsep-konsep fundamental seperti variabel, operator, kontrol alur, fungsi, struktur data, JSON, standard library, dan modul.</p>
+            <blockquote>"PAHAT — sederhana untuk dibaca, ringan untuk digunakan." 🚀 <br><br> Dibuat dengan ❤️ oleh Syahdan Masyhuri.</blockquote>
+        </section>
+
+        <!-- Metadata -->
+        <section id="metadata">
+            <h2>📌 Metadata</h2>
+            <table>
+                <thead>
+                    <tr><th>Properti</th><th>Nilai</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Nama</strong></td><td>PAHAT Programming Language</td></tr>
+                    <tr><td><strong>Kepanjangan</strong></td><td>Pemrograman Analitis Berbasis Heuristik dan Arsitektur Terpadu</td></tr>
+                    <tr><td><strong>Pembuat</strong></td><td>Syahdan Masyhuri</td></tr>
+                    <tr><td><strong>Versi</strong></td><td>1.2.0</td></tr>
+                    <tr><td><strong>Status</strong></td><td>Development</td></tr>
+                    <tr><td><strong>Ekstensi File</strong></td><td><code>.pahat</code></td></tr>
+                    <tr><td><strong>Bahasa Sintaks</strong></td><td>Bahasa Indonesia</td></tr>
+                    <tr><td><strong>Paradigma</strong></td><td>Prosedural, Imperatif, Fungsional</td></tr>
+                    <tr><td><strong>Lisensi</strong></td><td>MIT</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Variabel -->
+        <section id="variabel">
+            <h2>🔤 Variabel</h2>
+            <p>PAHAT menggunakan sintaks sederhana untuk membuat variabel dengan operator penugasan <code>=</code>. Penulisan baris dieksekusi dengan diakhiri tanda titik koma <code>;</code>.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>nama = "Syahdan";
+umur = 20;
+tinggi = 170.5;
+aktif = true;</code></pre>
+            </div>
+            <p>PAHAT menggunakan penetapan tipe data secara dinamis berdasarkan nilai yang diberikan. Variabel dapat berubah tipe selama program berjalan.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>angka = 10;
+angka = "sepuluh";</code></pre>
+            </div>
+        </section>
+
+        <!-- Tipe Data -->
+        <section id="tipe-data">
+            <h2>🧩 Tipe Data</h2>
+            <h3>INTEGER</h3>
+            <p>Bilangan bulat.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>umur = 20;
+jumlah = 100;</code></pre>
+            </div>
+
+            <h3>FLOAT</h3>
+            <p>Bilangan desimal yang dipisahkan tanda titik <code>.</code>.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>tinggi = 170.5;
+nilai = 98.75;</code></pre>
+            </div>
+
+            <h3>STRING</h3>
+            <p>Teks menggunakan tanda kutip ganda (<code>"..."</code>) atau kutip tunggal (<code>'...'</code>). PAHAT mendukung escape sequence seperti <code>\n</code>, <code>\t</code>, <code>\r</code>, <code>\"</code>, dan <code>\'</code>.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>nama = "Syahdan";
+pesan = 'Halo Dunia!';</code></pre>
+            </div>
+
+            <h3>BOOLEAN</h3>
+            <p>Nilai logika menggunakan <code>true</code> dan <code>false</code>.</p>
+
+            <h3>NULL</h3>
+            <p>PAHAT menggunakan <code>nol</code> sebagai representasi nilai kosong.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>data = nol;</code></pre>
+            </div>
+        </section>
+
+        <!-- Operator -->
+        <section id="operator">
+            <h2>🧮 Operator</h2>
+            <h3>Operator Aritmatika</h3>
+            <table>
+                <thead><tr><th>Operator</th><th>Fungsi</th><th>Contoh</th></tr></thead>
+                <tbody>
+                    <tr><td><code>+</code></td><td>Penjumlahan</td><td><code>a + b</code></td></tr>
+                    <tr><td><code>-</code></td><td>Pengurangan / Unary Minus</td><td><code>a - b</code>, <code>-a</code></td></tr>
+                    <tr><td><code>*</code></td><td>Perkalian</td><td><code>a * b</code></td></tr>
+                    <tr><td><code>/</code></td><td>Pembagian</td><td><code>a / b</code></td></tr>
+                    <tr><td><code>%</code></td><td>Modulo (Sisa Bagi)</td><td><code>a % b</code></td></tr>
+                    <tr><td><code>**</code></td><td>Pangkat (Exponentiation)</td><td><code>a ** b</code></td></tr>
+                </tbody>
+            </table>
+
+            <h3>Operator Perbandingan</h3>
+            <table>
+                <thead><tr><th>Operator</th><th>Fungsi</th></tr></thead>
+                <tbody>
+                    <tr><td><code>==</code></td><td>Sama dengan</td></tr>
+                    <tr><td><code>!=</code></td><td>Tidak sama dengan</td></tr>
+                    <tr><td><code>&lt;</code></td><td>Lebih kecil</td></tr>
+                    <tr><td><code>&gt;</code></td><td>Lebih besar</td></tr>
+                    <tr><td><code>&lt;=</code></td><td>Lebih kecil atau sama</td></tr>
+                    <tr><td><code>&gt;=</code></td><td>Lebih besar atau sama</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Operator Logika</h3>
+            <table>
+                <thead><tr><th>Operator</th><th>Fungsi</th></tr></thead>
+                <tbody>
+                    <tr><td><code>&amp;&amp;</code></td><td>AND</td></tr>
+                    <tr><td><code>||</code></td><td>OR</td></tr>
+                    <tr><td><code>^</code></td><td>XOR</td></tr>
+                    <tr><td><code>!</code></td><td>NOT (Negasi)</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Input dan Output -->
+        <section id="input-output">
+            <h2>🖨️ Input dan Output</h2>
+            <p>Untuk menampilkan nilai ke layar digunakan fungsi <code>cetak()</code>.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>cetak("Halo Dunia!");
+cetak(10);
+cetak(10 + 20);</code></pre>
+            </div>
+        </section>
+
+        <!-- Komentar -->
+        <section class="docs-section">
+            <h2>📝 Komentar (Comments)</h2>
+            <p>Komentar digunakan untuk memberi catatan pada kode tanpa mempengaruhi eksekusi program. PAHAT mendukung dua jenis komentar:</p>
+
+            <!-- Komentar Satu Baris -->
+            <h3>1. Komentar Satu Baris (Single-line)</h3>
+            <p>Gunakan simbol <code>//</code> atau <code>#</code> untuk menulis komentar satu baris.</p>
+            <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+            <pre><code class="language-pahat">// Ini adalah komentar satu baris
+nama = "Syahdan"; // Ini juga komentar satu baris</code></pre>
+
+            <!-- Komentar Multi Baris -->
+            <h3>2. Komentar Multi Baris (Multi-line)</h3>
+            <p>Gunakan blok <code>/* ... */</code> untuk menulis komentar yang mencakup beberapa baris sekaligus.</p>
+            <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+            <pre><code class="language-pahat">/*
+Dokumentasi Fungsi Utama
+PAHAT Programming Language v1.2.0
+Dibuat oleh: Adan
+*/
+fungsi utama() {
+    tulis("Halo, Dunia!");
+}</code></pre>
+        </section>
+
+        <!-- Percabangan -->
+        <section id="percabangan">
+            <h2>🔀 Percabangan</h2>
+            <p>PAHAT menggunakan kata kunci <code>jika</code> untuk mengevaluasi kondisi dan <code>lainnya</code> untuk alternatif kondisi.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>nilai = 85;
+
+jika (nilai >= 90) {
+    cetak("A");
+} lainnya jika (nilai >= 80) {
+    cetak("B");
+} lainnya {
+    cetak("C");
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Perulangan -->
+        <section id="perulangan">
+            <h2>🔁 Perulangan</h2>
+            <h3><code>selama</code> (While Loop)</h3>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>angka = 1;
+
+selama (angka <= 5) {
+    cetak(angka);
+    angka++;
+}</code></pre>
+            </div>
+
+            <h3><code>ulang</code> (For Loop)</h3>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>ulang (i = 0; i <= 4; i++) {
+    cetak("Halo PAHAT!");
+}</code></pre>
+            </div>
+
+            <h3>Hentikan Iterasi — <code>hentikan</code></h3>
+            <p>Gunakan <code>hentikan</code> untuk menghentikan perulangan secara paksa.</p>
+        </section>
+
+        <!-- Switch Case -->
+        <section id="switch">
+            <h2>🔀 Pilihan Kondisi (Switch Case)</h2>
+            <p>Menggunakan kata kunci <code>pilih</code>, <code>kasus</code>, dan <code>bawaan</code>. Menggunakan perilaku **no fall-through**.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>pilihan = 2;
+
+pilih (pilihan) {
+    kasus 1: {
+        cetak("Pilihan pertama");
+    }
+    kasus 2: {
+        cetak("Pilihan kedua");
+    }
+    bawaan: {
+        cetak("Pilihan tidak ditemukan");
+    }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Array -->
+        <section id="array">
+            <h2>📦 Array</h2>
+            <p>Array didefinisikan menggunakan kurung siku <code>[...]</code>. Elemen diakses berdasarkan indeks berbasis 0.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>angka = [10, 20, 30, 40, 50];
+
+cetak(angka[0]); // 10
+cetak(angka[2]); // 30</code></pre>
+            </div>
+        </section>
+
+        <!-- Object -->
+        <section id="object">
+            <h2>🗂️ Object</h2>
+            <p>PAHAT mendukung **object literal** untuk menyimpan pasangan key-value.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>pengguna = {
+    nama: "Syahdan",
+    umur: 20,
+    aktif: true
+};
+
+cetak(pengguna["nama"]);
+cetak(pengguna.umur);</code></pre>
+            </div>
+        </section>
+
+        <!-- JSON -->
+        <section id="json">
+            <h2>🧾 JSON</h2>
+            <p>PAHAT menyediakan fungsi bawaan <code>baca_json()</code> dan <code>tulis_json()</code> sebagai core builtin (tanpa perlu di-import).</p>
+        </section>
+
+        <!-- Fungsi -->
+        <section id="fungsi">
+            <h2>⚙️ Fungsi</h2>
+            <p>Fungsi dideklarasikan menggunakan kata kunci <code>fungsi</code> dan <code>kembalikan</code>.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>fungsi tambah(a, b) {
+    kembalikan a + b;
+}
+
+hasil = tambah(10, 20);
+cetak(hasil); // 30</code></pre>
+            </div>
+        </section>
+
+        <!-- Modul -->
+        <section id="modul">
+            <h2>📦 Modul</h2>
+            <p>Gunakan kata kunci <code>impor</code> diikuti string path module (ekstensi <code>.pahat</code> tidak ditulis).</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "modul/matematika";
+
+hasil = matematika.tambah(10, 20);
+cetak(hasil);</code></pre>
+            </div>
+        </section>
+
+        <!-- Standard Library -->
+        <section id="core-builtin">
+            <h2>📚 Standard Library</h2>
+            <h3>🧠 Core Builtin</h3>
+            <p>Dapat digunakan langsung tanpa <code>impor</code>:</p>
+            <ul>
+                <li><code>panjang(data)</code> — Menghitung panjang string/array.</li>
+                <li><code>tipe(data)</code> — Mendapatkan tipe data nilai.</li>
+                <li>Fungsi Garbage Collector: <code>gc_collect()</code>, <code>gc_object_count()</code>, dll.</li>
+            </ul>
+        </section>
+
+        <section id="std-math">
+            <h2>➗ Module <code>math</code></h2>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "math";
+
+cetak(math.tambah(10, 20));
+cetak(math.pangkat(10, 2));</code></pre>
+            </div>
+        </section>
+
+        <section id="std-string">
+            <h2>🔤 Module <code>string</code></h2>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "string";
+
+teks = "Halo Pahat";
+cetak(string.besar(teks));
+cetak(string.kecil(teks));</code></pre>
+            </div>
+        </section>
+
+        <section id="std-file">
+            <h2>📁 Module <code>file</code></h2>
+            <p>Menyediakan operasi file: <code>file.ada()</code>, <code>file.baca()</code>, <code>file.tulis()</code>, <code>file.tambah()</code>, <code>file.hapus()</code>, dan <code>file.ukuran()</code>.</p>
+        </section>
+
+        <section id="std-os">
+            <h2>💻 Module <code>os</code></h2>
+            <p>Menyediakan operasi sistem: <code>os.cwd()</code>, <code>os.getenv()</code>, <code>os.platform()</code>, <code>os.env()</code>, dan <code>os.exit()</code>.</p>
+        </section>
+
+        <section id="std-time">
+            <h2>⏱️ Module <code>time</code></h2>
+            <p>Menyediakan operasi waktu: <code>time.sekarang()</code>, <code>time.timestamp()</code>, dan <code>time.tidur()</code>.</p>
+        </section>
+
+        <!-- Contoh Program Lengkap -->
+        <section id="contoh-lengkap">
+            <h2>🧪 Contoh Program Lengkap</h2>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "modul/matematika";
+impor "math";
+impor "string";
+impor "file";
+impor "os";
+impor "time";
+
+pengguna = {
+    nama: "Syahdan",
+    umur: 20,
+    aktif: true,
+    nilai: [80, 90, 95]
+};
+
+cetak("=== DATA PENGGUNA ===");
+cetak(pengguna.nama);
+cetak(string.besar(pengguna.nama));
+
+jika (pengguna.umur >= 18 && pengguna.aktif) {
+    cetak("Pengguna aktif dan sudah dewasa");
+} lainnya {
+    cetak("Pengguna tidak memenuhi syarat");
+}
+
+cetak("=== MATEMATIKA ===");
+hasil = math.pangkat(10, 2);
+cetak(hasil);
+
+cetak("=== FILE & OS ===");
+cetak(os.platform());
+file.tulis("test.txt", "Hello PAHAT!");
+
+cetak("=== JSON ===");
+json_data = tulis_json(pengguna);
+cetak(json_data);</code></pre>
+            </div>
+        </section>
+
+        <!-- Lisensi -->
+        <section id="lisensi">
+            <h2>📜 Lisensi</h2>
+            <p>PAHAT menggunakan lisensi <strong>MIT</strong>.</p>
+        </section>
+
+    </main>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
