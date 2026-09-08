@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://adan1996.github.io/PAHAT-Lang/sitemap.xml
