@@ -238,7 +238,65 @@ cetak("Halo Dunia!");
 cetak(10);
 cetak(10 + 20);
 ```
+---
 
+
+## Input dengan `scan()`
+
+PAHAT menyediakan fungsi `scan()` untuk menerima input dari pengguna melalui terminal. Nilai yang dibaca oleh `scan()` berupa **string**.
+
+```pahat
+
+nama = scan("Nama: ");
+cetak(nama);
+
+```
+
+Untuk mengubah input menjadi tipe numerik, gunakan fungsi `ke_int()` untuk integer dan `ke_float()` untuk float.
+
+### `ke_int()`
+
+Mengonversi nilai input menjadi **integer**.
+
+```pahat
+
+umur = ke_int(scan("Umur: "));
+cetak(umur);
+
+```
+
+### `ke_float()`
+
+Mengonversi nilai input menjadi **float**.
+
+```pahat
+
+tinggi = ke_float(scan("Tinggi: "));
+cetak(tinggi);
+
+```
+
+### Contoh Input Lengkap
+
+```pahat
+
+// Input string
+nama = scan("Nama: ");
+
+// Input integer
+umur = ke_int(scan("Umur: "));
+
+// Input float
+tinggi = ke_float(scan("Tinggi: "));
+
+cetak("Nama:");
+cetak(nama);
+cetak("Umur:");
+cetak(umur);
+cetak("Tinggi:");
+cetak(tinggi);
+
+```
 ---
 
 # 🔀 Percabangan
