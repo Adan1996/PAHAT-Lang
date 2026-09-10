@@ -31,7 +31,7 @@ Bahasa ini dibuat dengan tujuan menghadirkan pendekatan alternatif dalam mempela
 | **Nama**           | PAHAT Programming Language                                     |
 | **Kepanjangan**    | Pemrograman Analitis Berbasis Heuristik dan Arsitektur Terpadu |
 | **Pembuat**        | Syahdan Masyhuri                                               |
-| **Versi**          | 1.2.0                                                          |
+| **Versi**          | 1.3.0                                                          |
 | **Status**         | Development                                                    |
 | **Ekstensi File**  | `.pahat`                                                       |
 | **Bahasa Sintaks** | Bahasa Indonesia                                               |
