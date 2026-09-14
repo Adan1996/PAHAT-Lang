@@ -31,7 +31,7 @@ Bahasa ini dibuat dengan tujuan menghadirkan pendekatan alternatif dalam mempela
 | **Nama**           | PAHAT Programming Language                                     |
 | **Kepanjangan**    | Pemrograman Analitis Berbasis Heuristik dan Arsitektur Terpadu |
 | **Pembuat**        | Syahdan Masyhuri                                               |
-| **Versi**          | 1.3.0                                                          |
+| **Versi**          | 2.1.0                                                          |
 | **Status**         | Development                                                    |
 | **Ekstensi File**  | `.pahat`                                                       |
 | **Bahasa Sintaks** | Bahasa Indonesia                                               |
@@ -46,6 +46,7 @@ Bahasa ini dibuat dengan tujuan menghadirkan pendekatan alternatif dalam mempela
 * [Metadata](#-metadata)
 * [Tentang PAHAT](#-tentang-pahat)
 * [Variabel](#-variabel)
+* [Block Scope & Lexical Scoping](#-block-scope--lexical-scoping)
 * [Tipe Data](#-tipe-data)
 * [Operator](#-operator)
 * [Input dan Output](#-input-dan-output)
@@ -58,6 +59,8 @@ Bahasa ini dibuat dengan tujuan menghadirkan pendekatan alternatif dalam mempela
 * [Fungsi](#-fungsi)
 * [Modul](#-modul)
 * [Standard Library](#-standard-library)
+* [Multi-Threading & Concurrency (Module `thread`)](#-multi-threading--concurrency-module-thread)
+* [Server-Side HTTP Server (Module `http`)](#-server-side-http-server-module-http)
 * [Komentar](#-komentar)
 * [Contoh Program Lengkap](#-contoh-program-lengkap)
 * [Ringkasan Fitur](#-ringkasan-fitur)
@@ -86,6 +89,49 @@ angka = "sepuluh";
 ```
 
 Variabel dapat berubah tipe selama program berjalan.
+
+---
+
+# 🧱 Block Scope & Lexical Scoping
+
+PAHAT mendukung **lexical / block scope**. Setiap blok kode (`{ ... }`), blok kondisi (`jika` / `lainnya`), blok perulangan (`selama` / `ulang`), dan blok percabangan (`pilih` / `kasus`) memiliki frame variabel tersendiri (block frame) yang terisolasi.
+
+### Detail Mekanisme Lexical Scope:
+
+* **Pencarian Variabel**: Pencarian variabel menelusuri rantai frame dari block frame saat ini hingga ke global frame.
+
+
+* **Mutasi vs Deklarasi**: Jika variabel sudah dideklarasikan di scope luar, perubahan nilai akan memutasi variabel tersebut. Jika belum ada, variabel baru akan dibuat di dalam block frame terdalam.
+
+
+* **Pembersihan Otomatis**: Variabel yang dibuat di dalam blok akan dibebaskan secara otomatis saat keluar dari blok dan tidak dapat diakses dari luar scope.
+
+
+* **Propagasi Sinyal Aliran**: Kata kunci `kembalikan`, `hentikan`, dan `lanjutkan` merambat secara aman keluar dari rantai blok scope.
+
+
+
+```pahat
+x = 10;
+{
+    y = 20;
+    x = 15;   // Mengubah x di outer scope
+    cetak(y); // 20
+}
+cetak(x); // 15
+// cetak(y); // Error: variabel 'y' tidak ditemukan (terisolasi di dalam blok)
+
+jika (true) {
+    temp = 100;
+}
+// cetak(temp); // Error: variabel 'temp' tidak ditemukan
+
+ulang (i = 0; i < 3; i++) {
+    cetak(i);
+}
+// cetak(i); // Error: variabel 'i' tidak ditemukan
+
+```
 
 ---
 
@@ -1048,6 +1094,117 @@ Nilai negatif tidak diperbolehkan.
 
 ---
 
+# 🧵 Multi-Threading & Concurrency (Module `thread`)
+
+PAHAT menyediakan dukungan multithreading dan concurrency terintegrasi. Setiap thread menjalankan fungsi PAHAT secara paralel dengan context eksekusi independen menggunakan **Thread-Local Storage (TLS)**.
+
+Import:
+
+```pahat
+impor "thread";
+
+```
+
+### Daftar Fungsi Modul `thread`:
+
+| Fungsi | Deskripsi |
+| --- | --- |
+| `thread.buat(nama_fungsi, arg)` | Menjalankan fungsi PAHAT di thread terpisah secara asinkron/paralel. Mengembalikan ID thread.
+
+ |
+| `thread.gabung(id)` | Menunggu eksekusi thread selesai (*join*) dan mengembalikan nilai hasilnya.
+
+ |
+| `thread.tidur(ms)` | Menjeda (*sleep*) eksekusi thread aktif selama durasi milidetik tertentu.
+
+ |
+| `thread.kunci_baru()` | Membuat instance mutex lock baru dan mengembalikan ID kunci.
+
+ |
+| `thread.kunci(id)` | Mengunci (*acquire lock*) untuk melindungi critical section / race condition.
+
+ |
+| `thread.buka(id)` | Membuka kunci (*release lock*).
+
+ |
+| `thread.jumlah_cpu()` | Mendapatkan jumlah logical CPU core pada sistem.
+
+ |
+
+### Contoh Concurrency & Mutex Lock:
+
+```pahat
+impor "thread";
+
+kunci = thread.kunci_baru();
+
+fungsi pekerja(pesan) {
+    thread.kunci(kunci);
+    cetak("Mulai kerja: " + pesan);
+    thread.buka(kunci);
+    
+    thread.tidur(500);
+    kembalikan "Selesai " + pesan;
+}
+
+t1 = thread.buat("pekerja", "Tugas A");
+t2 = thread.buat("pekerja", "Tugas B");
+
+hasil1 = thread.gabung(t1);
+hasil2 = thread.gabung(t2);
+
+cetak(hasil1);
+cetak(hasil2);
+
+```
+
+---
+
+# 🌐 Server-Side HTTP Server (Module `http`)
+
+Module `http` menyediakan HTTP Server native berkinerja tinggi menggunakan arsitektur *concurrent worker thread per connection*.
+
+Import:
+
+```pahat
+impor "http";
+
+```
+
+### Daftar Fungsi Modul `http`:
+
+| Fungsi | Deskripsi |
+| --- | --- |
+| `http.mulai(port, nama_handler)` | Menjalankan HTTP server multi-thread pada port yang ditentukan. Request ditangani secara non-blocking.
+
+ |
+| `http.respon(status, body, [tipe])` | Membuat objek respons HTTP standar (status code, body string/HTML, Content-Type).
+
+ |
+| `http.respon_json(status, data)` | Membuat objek respons JSON otomatis dari object/array PAHAT.
+
+ |
+
+### Contoh Penggunaan HTTP Server:
+
+```pahat
+impor "http";
+
+fungsi tangani(req) {
+    jika (req["path"] == "/") {
+        kembalikan http.respon(200, "");
+    } lainnya jika (req["path"] == "/api") {
+        kembalikan http.respon_json(200, {"status": "ok", "pesan": "Sukses"});
+    } lainnya {
+        kembalikan http.respon(404, "Tidak Ditemukan");
+    }
+}
+
+http.mulai(8080, "tangani");
+```
+
+---
+
 # 🔐 Aturan Import Standard Library
 
 Native module PAHAT menggunakan aturan import yang sama.
@@ -1059,6 +1216,8 @@ Native module PAHAT menggunakan aturan import yang sama.
 | `file`   | `impor "file";`   | `file.baca("data.txt")` |
 | `os`     | `impor "os";`     | `os.cwd()`              |
 | `time`   | `impor "time";`   | `time.sekarang()`       |
+| `thread` | `impor "thread";` | `thread.buat(...)`      |
+| `http`   | `impor "http";`   | `http.mulai(...)`       |
 
 Module native **tidak boleh digunakan sebelum di-import**.
 
@@ -1202,33 +1361,36 @@ cetak(json_data);
 
 # 📋 Ringkasan Fitur
 
-| Fitur               | Sintaks PAHAT                     |
-| ------------------- | --------------------------------- |
-| Variabel            | `nama = "Syahdan";`               |
-| Output              | `cetak("Teks");`                  |
-| Boolean             | `true` / `false`                  |
-| Null                | `nol`                             |
-| Operator Pangkat    | `a ** b`                          |
-| Percabangan         | `jika`, `lainnya jika`, `lainnya` |
-| Perulangan          | `selama (...)`, `ulang (...)`     |
-| Kontrol Perulangan  | `hentikan;`                       |
-| Multi Kondisi       | `pilih`, `kasus`, `bawaan`        |
-| Array               | `[1, 2, 3]`                       |
-| Akses Array         | `angka[0]`                        |
-| Object              | `{ nama: "PAHAT" }`               |
-| Akses Object        | `obj["key"]` / `obj.key`          |
-| Pengembalian Fungsi | `kembalikan`                      |
-| Fungsi              | `fungsi nama(...) { ... }`        |
-| JSON                | `baca_json()` / `tulis_json()`    |
-| Import Module       | `impor "nama/module";`            |
-| Import Native       | `impor "math";`                   |
-| Panggilan Module    | `nama_module.fungsi()`            |
-| Math                | `math.fungsi()`                   |
-| String              | `string.fungsi()`                 |
-| File                | `file.fungsi()`                   |
-| OS                  | `os.fungsi()`                     |
-| Time                | `time.fungsi()`                   |
-| Core                | `panjang()`, `tipe()`, fungsi GC  |
+| Fitur               | Sintaks PAHAT                      |
+| ------------------- | ---------------------------------  |
+| Variabel            | `nama = "Syahdan";`                |
+| Output              | `cetak("Teks");`                   |
+| Boolean             | `true` / `false`                   |
+| Null                | `nol`                              |
+| Operator Pangkat    | `a ** b`                           |
+| Percabangan         | `jika`, `lainnya jika`, `lainnya`  |
+| Perulangan          | `selama (...)`, `ulang (...)`      |
+| Kontrol Perulangan  | `hentikan;`                        |
+| Multi Kondisi       | `pilih`, `kasus`, `bawaan`         |
+| Array               | `[1, 2, 3]`                        |
+| Akses Array         | `angka[0]`                         |
+| Object              | `{ nama: "PAHAT" }`                |
+| Akses Object        | `obj["key"]` / `obj.key`           |
+| Pengembalian Fungsi | `kembalikan`                       |
+| Fungsi              | `fungsi nama(...) { ... }`         |
+| JSON                | `baca_json()` / `tulis_json()`     |
+| Import Module       | `impor "nama/module";`             |
+| Import Native       | `impor "math";`                    |
+| Panggilan Module    | `nama_module.fungsi()`             |
+| Math                | `math.fungsi()`                    |
+| String              | `string.fungsi()`                  |
+| File                | `file.fungsi()`                    |
+| OS                  | `os.fungsi()`                      |
+| Time                | `time.fungsi()`                    |
+| Core                | `panjang()`, `tipe()`, fungsi GC   |
+| Concurrency         | `thread.buat()`, `thread.gabung()` |
+| HTTP Server         | `http.mulai()`, `http.respon()`    |
+| Block Scoping       | Scope lokal terisolasi di `{ ... }`|
 
 ---
 

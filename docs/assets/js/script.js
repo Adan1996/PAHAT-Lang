@@ -21,3 +21,12 @@ document.querySelectorAll('.copy-btn').forEach(button => {
         });
     });
 });
+
+// Menutup sidebar saat link di dalam accordion diklik (khusus tampilan mobile)
+document.querySelectorAll('.accordion-content a').forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+            sidebar.classList.remove('active');
+        }
+    });
+});

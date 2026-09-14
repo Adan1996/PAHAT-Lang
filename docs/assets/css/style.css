@@ -345,6 +345,76 @@ tr:last-child td {
     color: var(--accent-color);
 }
 
+/* Styling Expand / Collapse Accordion di Sidebar */
+.nav-accordion {
+    width: 100%;
+}
+
+.nav-accordion summary {
+    list-style: none; /* Sembunyikan panah default browser */
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.nav-accordion summary::-webkit-details-marker {
+    display: none; /* Sembunyikan panah default pada Safari/Chrome */
+}
+
+.nav-accordion summary:hover {
+    background-color: var(--bg-tertiary);
+}
+
+.nav-accordion summary .nav-title-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.accordion-header {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+/* Rotasi panah saat terbuka */
+.arrow-icon {
+    font-size: 0.75rem;
+    transition: transform 0.25s ease;
+}
+
+.nav-accordion[open] .arrow-icon {
+    transform: rotate(180deg);
+}
+
+/* Margin isi accordion */
+.accordion-content {
+    margin-top: 6px;
+    padding-left: 8px;
+}
+
+/* Icon Kustom VS Code jika tidak ada di FontAwesome bawaan */
+.fa-custom-vscode {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-color: currentColor;
+    mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.12a.999.999 0 0 0-1.276.076L.359 7.24a.999.999 0 0 0 .092 1.508l3.743 2.907-3.743 2.908a1 1 0 0 0-.092 1.507l1.29 1.157a1 1 0 0 0 1.276.076l4.12-3.12 9.46 8.63a1.49 1.49 0 0 0 1.704.29l4.94-2.377A1.5 1.5 0 0 0 24 22.33V3.96a1.5 1.5 0 0 0-.85-1.373zM18 16.58l-6.19-4.58L18 7.42v9.16z'/></svg>") no-repeat center;
+    -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.12a.999.999 0 0 0-1.276.076L.359 7.24a.999.999 0 0 0 .092 1.508l3.743 2.907-3.743 2.908a1 1 0 0 0-.092 1.507l1.29 1.157a1 1 0 0 0 1.276.076l4.12-3.12 9.46 8.63a1.49 1.49 0 0 0 1.704.29l4.94-2.377A1.5 1.5 0 0 0 24 22.33V3.96a1.5 1.5 0 0 0-.85-1.373zM18 16.58l-6.19-4.58L18 7.42v9.16z'/></svg>") no-repeat center;
+}
+
+ul {
+    padding-left: 25px;
+}
+
 pre {
     background-color: var(--code-bg);
     padding: 16px;
