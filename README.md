@@ -31,7 +31,7 @@ Bahasa ini dibuat dengan tujuan menghadirkan pendekatan alternatif dalam mempela
 | **Nama**           | PAHAT Programming Language                                     |
 | **Kepanjangan**    | Pemrograman Analitis Berbasis Heuristik dan Arsitektur Terpadu |
 | **Pembuat**        | Syahdan Masyhuri                                               |
-| **Versi**          | 2.2.0                                                          |
+| **Versi**          | 2.3.1                                                          |
 | **Status**         | Development                                                    |
 | **Ekstensi File**  | `.pahat`                                                       |
 | **Bahasa Sintaks** | Bahasa Indonesia                                               |
@@ -554,6 +554,37 @@ cetak(hasil); // 30
 ```
 
 Fungsi dapat memiliki parameter dan dapat dipanggil dari module lain.
+
+## 🤫 Fungsi Anonim (Anonymous Function / Lambda)
+
+Fungsi tanpa nama dapat dibuat dan disimpan ke variabel, dijadikan argumen fungsi (*higher-order function*), disimpan dalam object/array, atau dipanggil secara langsung (*IIFE*).
+
+```pahat
+// 1. Disimpan ke variabel
+kali = fungsi(a, b) {
+    kembalikan a * b;
+};
+cetak(kali(5, 4)); // 20
+
+// 2. Dipassing sebagai argumen (Higher-Order Function)
+fungsi jalankan(fn, nilai) {
+    kembalikan fn(nilai);
+}
+hasil = jalankan(fungsi(x) { kembalikan x + 10; }, 5);
+cetak(hasil); // 15
+
+// 3. Dipanggil langsung (IIFE)
+hasil_iife = (fungsi(x) { kembalikan x * 2; })(50);
+cetak(hasil_iife); // 100
+
+// 4. Metode pada Object
+pengguna = {
+    "sapa": fungsi(nama) {
+        kembalikan "Halo " + nama;
+    }
+};
+cetak(pengguna.sapa("Budi")); // Halo Budi
+```
 
 ---
 
