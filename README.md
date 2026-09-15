@@ -31,7 +31,7 @@ Bahasa ini dibuat dengan tujuan menghadirkan pendekatan alternatif dalam mempela
 | **Nama**           | PAHAT Programming Language                                     |
 | **Kepanjangan**    | Pemrograman Analitis Berbasis Heuristik dan Arsitektur Terpadu |
 | **Pembuat**        | Syahdan Masyhuri                                               |
-| **Versi**          | 2.1.0                                                          |
+| **Versi**          | 2.2.0                                                          |
 | **Status**         | Development                                                    |
 | **Ekstensi File**  | `.pahat`                                                       |
 | **Bahasa Sintaks** | Bahasa Indonesia                                               |
@@ -1190,18 +1190,128 @@ impor "http";
 ```pahat
 impor "http";
 
-fungsi tangani(req) {
-    jika (req["path"] == "/") {
-        kembalikan http.respon(200, "");
-    } lainnya jika (req["path"] == "/api") {
-        kembalikan http.respon_json(200, {"status": "ok", "pesan": "Sukses"});
-    } lainnya {
-        kembalikan http.respon(404, "Tidak Ditemukan");
-    }
+// ==========================================
+// 1. HANDLER HALAMAN UTAMA / BERANDA
+// ==========================================
+fungsi tangani_beranda(req) {
+    html = "" +
+           "PAHAT HTTP Server" +
+           "" +
+           "# Selamat Datang di PAHAT Web Server!
+
+           " +
+           "
+
+           Server ini mendukung routing dinamis, method matching, dan kustomisasi header.
+
+           " +
+           "" +
+           "";
+
+    kembalikan http.respon(200, html);
 }
 
-http.mulai(8080, "tangani");
+// ==========================================
+// 2. HANDLER LIST PENGGUNA (GET)
+// ==========================================
+fungsi tangani_daftar_pengguna(req) {
+    daftar = [
+        {"id": "1", "nama": "Budi", "peran": "Developer"},
+        {"id": "2", "nama": "Siti", "peran": "Designer"}
+    ];
+
+    kembalikan http.respon_json(200, daftar);
+}
+
+// ==========================================
+// 3. HANDLER DENGAN PARAMETER URL (GET /api/pengguna/{id})
+// ==========================================
+fungsi tangani_detail_pengguna(req) {
+    // Mengambil parameter 'id' dari URL dinamis
+    user_id = req["params"]["id"];
+
+
+    res_data = {
+        "status": "berhasil",
+        "user_id": user_id,
+        "detail": {
+            "nama": "Pengguna " + user_id,
+            "status_akun": "aktif"
+        }
+    };
+
+    kembalikan http.respon_json(200, res_data);
+}
+
+// ==========================================
+// 4. HANDLER TAMBAH PENGGUNA (POST)
+// ==========================================
+fungsi tangani_tambah_pengguna(req) {
+    res_data = {
+        "pesan": "Pengguna baru berhasil ditambahkan!",
+        "payload": req["body"]
+    };
+
+    kembalikan http.respon_json(201, res_data);
+}
+
+// ==========================================
+// 5. HANDLER TERPROTEKSI & CUSTOM HEADERS
+// ==========================================
+fungsi tangani_area_rahasia(req) {
+    // Membaca header Authorization dari Request Client
+    auth_header = req["headers"]["authorization"];
+
+
+    // Verifikasi Token
+    jika (auth_header != "Bearer rahasia123") {
+        header_error = {
+            "WWW-Authenticate": "Bearer realm='Akses Terbatas'"
+        };
+        // Status 401 Unauthorized + Custom Header Response
+        kembalikan http.respon(401, "Akses Ditolak! Token Salah atau Tidak Ditemukan.", "text/html", header_error);
+    }
+
+    // Custom Response Headers (CORS & Cookie) jika autentikasi berhasil
+    custom_headers = {
+        "Access-Control-Allow-Origin": "*",
+        "X-Powered-By": "PAHAT-Engine",
+        "Set-Cookie": "session_id=98765; Path=/"
+    };
+
+    res_data = {
+        "status": "sukses",
+        "pesan": "Selamat! Anda berhasil mengakses data rahasia."
+    };
+
+    kembalikan http.respon_json(200, res_data, custom_headers);
+}
+
+// ==========================================
+// REGISTRASI RUTE (ROUTING TABLE)
+// Sintaks: http.tangani("METHOD", "PATH", "NAMA_FUNGSI")
+// ==========================================
+http.tangani("GET", "/", "tangani_beranda");
+http.tangani("GET", "/api/pengguna", "tangani_daftar_pengguna");
+http.tangani("GET", "/api/pengguna/{id}", "tangani_detail_pengguna");
+http.tangani("POST", "/api/pengguna", "tangani_tambah_pengguna");
+http.tangani("GET", "/api/rahasia", "tangani_area_rahasia");
+
+// ==========================================
+// JALANKAN HTTP SERVER
+// Sintaks: http.mulai("HOST", PORT)
+// ==========================================
+cetak("Memulai PAHAT HTTP Server di http://0.0.0.0:8080...");
+http.mulai("0.0.0.0", 8080);
 ```
+
+### Pengujian Rute yang Tersedia:
+
+1. GET `/` $\rightarrow$ Menampilkan halaman HTML utama.
+2. GET `/api/pengguna` $\rightarrow$ Mengembalikan daftar pengguna format JSON.
+3. GET `/api/pengguna/42` $\rightarrow$ Mengembalikan data dinamis untuk `user_id: "42"`.
+4. POST `/api/pengguna` $\rightarrow$ Menerima payload body dan mengembalikan status 201 Created.
+5. GET `/api/rahasia` $\rightarrow$ Membutuhkan header `Authorization: Bearer rahasia123`. Mengembalikan status 401 jika salah/tanpa header, dan status 200 disertai Cookie & CORS jika token benar.
 
 ---
 
