@@ -9,7 +9,7 @@
     --text-muted: #64748b;
     --border-color: #334155;
     --code-bg: #090d16;
-    --sidebar-width: 280px;
+    --sidebar-width: 300px;
 }
 
 * {
@@ -133,10 +133,17 @@ aside {
 .brand {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding-bottom: 20px;
+    justify-content: space-between;
+    gap: 8px;
+    padding-bottom: 16px;
     margin-bottom: 20px;
     border-bottom: 1px solid var(--border-color);
+}
+
+.brand-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .brand-logo {
@@ -163,6 +170,109 @@ aside {
     color: var(--accent-color);
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+/* Language Toggle Switch */
+.lang-switch-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--bg-primary);
+    padding: 4px 8px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    font-size: 0.72rem;
+    font-weight: 700;
+    user-select: none;
+}
+
+.lang-label {
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+    cursor: pointer;
+}
+
+.lang-label.active {
+    color: var(--accent-color);
+}
+
+.lang-switch {
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 18px;
+}
+
+.lang-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.lang-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--bg-tertiary);
+    transition: 0.25s ease;
+    border-radius: 18px;
+}
+
+.lang-slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #ffffff;
+    transition: 0.25s ease;
+    border-radius: 50%;
+}
+
+.lang-switch input:checked + .lang-slider {
+    background-color: var(--accent-color);
+}
+
+.lang-switch input:checked + .lang-slider:before {
+    transform: translateX(14px);
+}
+
+/* Top Navigation Bar for Header Language Switch */
+.top-header-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Status Badge Lingva API */
+.translation-status {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background-color: var(--bg-secondary);
+    color: var(--accent-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.translation-status.show {
+    opacity: 1;
 }
 
 .nav-group {
