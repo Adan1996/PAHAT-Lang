@@ -31,7 +31,7 @@ Bahasa ini dibuat dengan tujuan menghadirkan pendekatan alternatif dalam mempela
 | **Nama**           | PAHAT Programming Language                                     |
 | **Kepanjangan**    | Pemrograman Analitis Berbasis Heuristik dan Arsitektur Terpadu |
 | **Pembuat**        | Syahdan Masyhuri                                               |
-| **Versi**          | 2.3.1                                                          |
+| **Versi**          | 2.4.2                                                          |
 | **Status**         | Development                                                    |
 | **Ekstensi File**  | `.pahat`                                                       |
 | **Bahasa Sintaks** | Bahasa Indonesia                                               |
@@ -53,6 +53,7 @@ Bahasa ini dibuat dengan tujuan menghadirkan pendekatan alternatif dalam mempela
 * [Percabangan](#-percabangan)
 * [Perulangan](#-perulangan)
 * [Pilihan Kondisi (Switch Case)](#-pilihan-kondisi-switch-case)
+* [Penanganan Error (Try-Catch)](#-penanganan-error-try-catch)
 * [Array](#-array)
 * [Object](#-object)
 * [JSON](#-json)
@@ -446,6 +447,46 @@ PAHAT menggunakan perilaku **no fall-through**, sehingga setelah satu `kasus` co
 `bawaan` hanya dijalankan apabila tidak ada `kasus` yang cocok.
 
 Ekspresi `kasus` juga dapat berupa ekspresi PAHAT.
+
+---
+
+# 🛡️ Penanganan Error (Try-Catch)
+
+PAHAT menyediakan fitur penanganan error (*exception/error handling*) terintegrasi menggunakan kata kunci `coba` (atau alias `try`), `tangkap` (atau alias `catch`), dan `lempar` (atau alias `catch`).
+
+Fitur ini memungkinkan program untuk menangkap runtime error (seperti pembagian dengan nol atau variabel yang belum terdefinisi) tanpa membuat program *crash* atau berhenti mendadak.
+
+### Sintaks Dasar:
+
+```pahat
+coba {
+    // Blok kode yang berisiko menghasilkan error
+    hasil = 10 / 0;
+} tangkap (err) {
+    // Blok kode yang dijalankan jika terjadi error
+    cetak("Terjadi kesalahan:");
+    cetak(err);
+}
+```
+
+### Menggunakan Kata Kunci `lempar` (`throw`):
+
+Anda juga dapat melempar error kustom secara manual dengan pesan string tertentu:
+
+```pahat
+fungsi bagi(a, b) {
+    jika (b == 0) {
+        lempar "Pembagi tidak boleh nol!";
+    }
+    kembalikan a / b;
+}
+
+coba {
+    hasil = bagi(100, 0);
+} tangkap (e) {
+    cetak(e); // "Error pada baris ...: Pembagi tidak boleh nol!"
+}
+```
 
 ---
 
@@ -1513,6 +1554,7 @@ cetak(json_data);
 | Perulangan          | `selama (...)`, `ulang (...)`      |
 | Kontrol Perulangan  | `hentikan;`                        |
 | Multi Kondisi       | `pilih`, `kasus`, `bawaan`         |
+| Penanganan Error    | `coba`, `tangkap`, `lempar` (`try`, `catch`, `throw`) |
 | Array               | `[1, 2, 3]`                        |
 | Akses Array         | `angka[0]`                         |
 | Object              | `{ nama: "PAHAT" }`                |
