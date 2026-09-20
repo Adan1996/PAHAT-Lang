@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    <title>PAHAT MySQL Module - Documentation Guide</title>
+    <meta name="title" content="PAHAT-Lang - Dokumentasi Modul MySQL">
+    <meta name="description" content="Dokumentasi resmi penggunaan modul database MySQL untuk bahasa pemrograman PAHAT-Lang. Modul native C, query eksekusi, prepared statement, dan koneksi database.">
+    <meta name="keywords" content="PAHAT, PAHAT-Lang, MySQL Module, Database Driver, C Extension, PAHAT Database, MySQL Connector">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://adan1996.github.io/PAHAT-Lang/">
+    <meta property="og:title" content="PAHAT-Lang - Dokumentasi Modul MySQL">
+    <meta property="og:description" content="Panduan lengkap penggunaan Modul MySQL pada bahasa pemrograman PAHAT-Lang.">
+    <meta property="og:image" content="https://adan1996.github.io/PAHAT-Lang/assets/img/pahat.jpg">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="google-site-verification" content="OaLiclYNOwslLSfNQ2kmZGcojz48e80lO0XV3UPXADo" />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+    <button class="mobile-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar">
+        <div class="nav-group">
+            <div class="nav-title">Pengenalan Modul</div>
+            <ul class="nav-links">
+                <li><a href="#tentang"><i class="fa-solid fa-circle-info"></i> Tentang Modul</a></li>
+                <li><a href="#metadata"><i class="fa-solid fa-table-list"></i> Spesifikasi</a></li>
+                <li><a href="#tahap-awal"><i class="fa-solid fa-download"></i> Instalasi Modul</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">Koneksi Database</div>
+            <ul class="nav-links">
+                <li><a href="#variabel"><i class="fa-solid fa-plug"></i> Buka Koneksi</a></li>
+                <li><a href="#tipe-data"><i class="fa-solid fa-shield-halved"></i> Opsi Koneksi (SSL/Port)</a></li>
+                <li><a href="#operator"><i class="fa-solid fa-power-off"></i> Tutup Koneksi</a></li>
+                <li><a href="#input-output"><i class="fa-solid fa-triangle-exclamation"></i> Cek Status Error</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">Operasi Database</div>
+            <ul class="nav-links">
+                <li><a href="#percabangan"><i class="fa-solid fa-terminal"></i> Eksekusi Query</a></li>
+                <li><a href="#perulangan"><i class="fa-solid fa-database"></i> Ambil Data (Select)</a></li>
+                <li><a href="#switch"><i class="fa-solid fa-pen-to-square"></i> Insert / Update / Delete</a></li>
+                <li><a href="#try"><i class="fa-solid fa-layer-group"></i> Transaksi SQL</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">Fitur Lanjutan</div>
+            <ul class="nav-links">
+                <li><a href="#object"><i class="fa-solid fa-table-cells"></i> Mapped Object Row</a></li>
+                <li><a href="#json"><i class="fa-solid fa-file-code"></i> Handling JSON Column</a></li>
+                <li><a href="#fungsi"><i class="fa-solid fa-gears"></i> Connection Pooling</a></li>
+                <li><a href="#modul"><i class="fa-solid fa-arrows-split-up-and-left"></i> Multi-Thread Driver</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">Referensi API</div>
+            <ul class="nav-links">
+                <li><a href="#core-builtin"><i class="fa-solid fa-code"></i> Fungsi Core MySQL</a></li>
+                <li><a href="#std-math"><i class="fa-solid fa-link"></i> mysql.connect()</a></li>
+                <li><a href="#std-string"><i class="fa-solid fa-magnifying-glass"></i> mysql.query()</a></li>
+                <li><a href="#std-file"><i class="fa-solid fa-box-archive"></i> mysql.fetch() & mysql.fetch_one()</a></li>
+                <li><a href="#std-os"><i class="fa-solid fa-hashtag"></i> mysql.last_id()</a></li>
+                <li><a href="#std-time"><i class="fa-solid fa-square-check"></i> mysql.affected_rows()</a></li>
+                <li><a href="#std-thread"><i class="fa-solid fa-list-check"></i> Transaksi SQL</a></li>
+                <li><a href="#std-http"><i class="fa-solid fa-circle-xmark"></i> mysql.close()</a></li>
+            </ul>
+        </div>
+        
+        <div class="nav-group">
+            <div class="nav-title">Modul Lainnya</div>
+            <ul class="nav-links">
+                <li><a href="https://adan1996.github.io/PAHAT-Lang/"><i class="fa-solid fa-house"></i> Utama (PAHAT Docs)</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">Lainnya</div>
+            <ul class="nav-links">
+                <li><a href="#contoh-lengkap"><i class="fa-solid fa-laptop-code"></i> Skrip Studi Kasus</a></li>
+                <li><a href="#lisensi"><i class="fa-solid fa-certificate"></i> Lisensi Modul</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Section Syarat & Ketentuan Sistem (Pre-requisites) -->
+        <section class="prerequisites">
+            <h2>Prasyarat Sistem (Pre-requisites)</h2>
+            <p>Sebelum menggunakan modul MySQL pada PAHAT-Lang, pastikan sistem Anda memenuhi kebutuhan berikut:</p>
+            
+            <ul>
+                <li><strong>MySQL Client Library:</strong> Terinstal pustaka Client Native (`libmysqlclient` pada Linux atau `libmysql.dll` pada Windows).</li>
+                <li><strong>Server Database:</strong> Server MySQL (v5.7 / v8.0+) atau MariaDB (v10.3+) yang dapat diakses secara lokal maupun remote.</li>
+                <li><strong>Interpreter PAHAT:</strong> PAHAT-Lang v2.5.0 atau versi yang lebih baru.</li>
+            </ul>
+        </section>
+
+        <!-- Tentang PAHAT MySQL -->
+        <section id="tentang">
+            <h2>👨‍💻 Tentang Modul MySQL</h2>
+            <p>Modul <strong>mysql</strong> dikembangkan untuk memberikan akses penuh kepada pengembang PAHAT-Lang dalam melakukan manipulasi data pada basis data relasional MySQL secara cepat, stabil, dan aman.</p>
+            <p>Driver ini dibangun berbasis kode C (*native extension*) menggunakan API `libmysqlclient`, memungkinkan integrasi tipe data PAHAT (seperti String, Integer, Float, Object, dan Array) secara otomatis dengan tipe data kolom SQL.</p>
+            <blockquote>"Kueri database berkecepatan native dengan kenyamanan sintaks modern PAHAT-Lang." 🚀 <br><br> Dibuat dengan ❤️ oleh Syahdan Masyhuri.</blockquote>
+        </section>
+
+        <!-- Metadata -->
+        <section id="metadata">
+            <h2>📌 Metadata Modul</h2>
+            <table>
+                <thead>
+                    <tr><th>Properti</th><th>Nilai</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Nama Modul</strong></td><td>mysql</td></tr>
+                    <tr><td><strong>Pengembang</strong></td><td>Syahdan Masyhuri</td></tr>
+                    <tr><td><strong>Versi Driver</strong></td><td>1.0.1</td></tr>
+                    <tr><td><strong>Native Binding</strong></td><td>C / C++ Dynamic Library (`.dll` / `.so`)</td></tr>
+                    <tr><td><strong>Kesesuaian Interpreter</strong></td><td>PAHAT v2.5.0+</td></tr>
+                    <tr><td><strong>Ekstensi Biner</strong></td><td><code>mysql_pahat.dll</code> (Win) / <code>mysql_pahat.so</code> (Linux)</td></tr>
+                    <tr><td><strong>Ketergantungan Utama</strong></td><td>MySQL Connector/C (`libmysql`)</td></tr>
+                    <tr><td><strong>Paradigma Support</strong></td><td>Procedural & Object-Oriented Interface</td></tr>
+                    <tr><td><strong>Lisensi</strong></td><td>MIT</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Tahap Awal / Instalasi -->
+        <section id="tahap-awal">
+            <h2>▶️ Instalasi & Import Modul</h2>
+            <p>Gunakan Package Manager PAHAT (`pahat pm`) untuk memasang modul MySQL ke direktori modul aplikasi Anda.</p>
+            <div class="code-container">
+                <div class="code-header"><span>Terminal</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>C:\path\users>pahat pm install mysql</code></pre>
+            </div>
+            <p>Setelah modul terpasang, panggil modul di dalam berkas <code>.pahat</code> menggunakan perintah <code>impor</code>.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "mysql";
+
+// Modul siap digunakan
+cetak("Modul MySQL Berhasil Dimuat!");</code></pre>
+            </div>
+        </section>
+
+        <!-- Buka Koneksi -->
+        <section id="variabel">
+            <h2>🔌 Buka Koneksi Database</h2>
+            <p>Untuk menghubungkan skrip ke server MySQL, gunakan fungsi <code>mysql.connect()</code> dengan memberikan parameter host, nama pengguna, kata sandi, nama database, dan port.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "mysql";
+
+host = "localhost";
+user = "root";
+pass = "rahasia123";
+db_nama = "toko_online";
+port = 3306;
+
+db = mysql.connect(host, user, pass, db_nama, port);
+
+jika (!db) {
+    cetak("Gagal terhubung ke MySQL!");
+} lainnya {
+    cetak("Berhasil terhubung ke database " + db_nama);
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Konfigurasi SSL/Port -->
+        <section id="tipe-data">
+            <h2>🛡️ Konfigurasi Opsi Koneksi Advanced</h2>
+            <p>Gunakan <code>mysql.connect_options()</code> dengan memberikan parameter bertipe Object untuk mengonfigurasi koneksi dengan opsi tambahan seperti enkripsi SSL, timeout, dan charset.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>konfig = {
+    "host": "127.0.0.1",
+    "user": "admin",
+    "pass": "securepass",
+    "db": "db_produksi",
+    "port": 3306,
+    "charset": "utf8mb4",
+    "timeout": 10,
+    "ssl": true
+};
+
+db = mysql.connect_options(konfig);</code></pre>
+            </div>
+        </section>
+
+        <!-- Tutup Koneksi -->
+        <section id="operator">
+            <h2>⚡ Pengelolaan Sesi & Penutupan Koneksi</h2>
+            <p>Gunakan metode <code>mysql.close()</code> untuk mengakhiri sesi koneksi dan membebaskan alokasi memori pada server.</p>
+            <table>
+                <thead><tr><th>Fungsi API</th><th>Deskripsi</th><th>Keterangan</th></tr></thead>
+                <tbody>
+                    <tr><td><code>mysql.ping(db)</code></td><td>Mengecek keaktifan server</td><td>Mengembalikan status <code>true</code> jika koneksi masih tersambung.</td></tr>
+                    <tr><td><code>mysql.select_db(db, "nama_db")</code></td><td>Pindah Database</td><td>Mengubah konteks database aktif.</td></tr>
+                    <tr><td><code>mysql.close(db)</code></td><td>Tutup Sesi Koneksi</td><td>Memutuskan koneksi MySQL dan menghapus handler.</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Status Error -->
+        <section id="input-output">
+            <h2>⚠️ Penanganan Pesan Error</h2>
+            <p>Gunakan fungsi <code>mysql.error()</code> dan <code>mysql.errno()</code> untuk membaca deskripsi serta kode kesalahan terakhir dari driver MySQL.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>db = mysql.connect("localhost", "root", "salah_pass", "db_test", 3306);
+
+jika (!db) {
+    pesan_err = mysql.error();
+    kode_err = mysql.errno();
+    
+    cetak("Kode Error: " + kode_err);
+    cetak("Pesan Error: " + pesan_err);
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Eksekusi Query -->
+        <section id="percabangan">
+            <h2>🔀 Eksekusi Query SQL</h2>
+            <p>Fungsi <code>mysql.query()</code> digunakan untuk menjalankan perintah SQL umum (DDL maupun DML) seperti <code>CREATE TABLE</code>, <code>DROP</code>, atau <code>SET NAMES</code>.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>sql_buat_tabel = "CREATE TABLE IF NOT EXISTS pengguna (" +
+                 "id INT AUTO_INCREMENT PRIMARY KEY, " +
+                 "nama VARCHAR(100) NOT NULL, " +
+                 "email VARCHAR(100) UNIQUE, " +
+                 "umur INT" +
+                 ") ENGINE=InnoDB;";
+
+status = mysql.query(db, sql_buat_tabel);
+
+jika (status) {
+    cetak("Tabel 'pengguna' siap digunakan!");
+} lainnya {
+    cetak("Gagal membuat tabel: " + mysql.error(db));
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Ambil Data (Select) -->
+        <section id="perulangan">
+            <h2>🔁 Membaca Data (SELECT & Fetching)</h2>
+            <p>Untuk membaca seluruh baris data dari kueri `SELECT`, gunakan <code>mysql.fetch()</code> yang mengembalikan **Array dari Object**. Jika hanya membutuhkan 1 baris pertama, gunakan <code>mysql.fetch_one()</code>.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>hasil = mysql.fetch(db, "SELECT id, nama, email, umur FROM pengguna");
+
+ulang (i = 0; i < panjang(hasil); i++) {
+    // Membaca properti objek langsung melalui nama kolom
+    cetak("ID: " + hasil[i].id + " | Nama: " + hasil[i].nama + " | Email: " + hasil[i].email);
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Insert / Update / Delete -->
+        <section id="switch">
+            <h2>📝 Manipulasi Data (INSERT, UPDATE, DELETE)</h2>
+            <p>Saat melakukan manipulasi data, Anda dapat mengambil jumlah baris yang terpengaruh dengan <code>mysql.affected_rows()</code> dan ID *auto-increment* terakhir dengan <code>mysql.last_id()</code>.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>sql_insert = "INSERT INTO pengguna (nama, email, umur) VALUES ('Syahdan', 'syahdan@pahat.lang', 25)";
+
+jika (mysql.query(db, sql_insert)) {
+    id_baru = mysql.last_id(db);
+    total_baris = mysql.affected_rows(db);
+    
+    cetak("Data tersimpan! ID Baru: " + id_baru);
+    cetak("Baris Terpengaruh: " + total_baris);
+}</code></pre>
+            </div>
+        </section>
+        
+        <!-- Transaksi SQL -->
+        <section id="try">
+            <h2>🛡️ Transaksi Database (ACID)</h2>
+            <p>Manajemen transaksi dilakukan dengan menjalankan kueri SQL transaksi standar (`START TRANSACTION`, `COMMIT`, `ROLLBACK`) via <code>mysql.query()</code> bersama blok <code>coba - tangkap</code>.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>coba {
+    mysql.query(db, "START TRANSACTION");
+
+    // Potong saldo pengirim
+    q1 = mysql.query(db, "UPDATE rekening SET saldo = saldo - 500000 WHERE id = 1");
+    jika (!q1) { lempar "Gagal mendebet saldo pengirim!"; }
+
+    // Tambah saldo penerima
+    q2 = mysql.query(db, "UPDATE rekening SET saldo = saldo + 500000 WHERE id = 2");
+    jika (!q2) { lempar "Gagal mengkredit saldo penerima!"; }
+
+    // Komit transaksi jika semua sukses
+    mysql.query(db, "COMMIT");
+    cetak("Transfer dana berhasil!");
+
+} tangkap (e) {
+    // Batalkan seluruh perubahan jika terjadi kesalahan
+    mysql.query(db, "ROLLBACK");
+    cetak("Transaksi Dibatalkan: " + e);
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Mapped Object Row -->
+        <section id="object">
+            <h2>🗂️ Pemetaan Hasil ke Tipe Data Object</h2>
+            <p>Gunakan <code>mysql.fetch_one()</code> untuk mengambil satu baris secara langsung dalam bentuk objek khas PAHAT.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>row = mysql.fetch_one(db, "SELECT * FROM produk WHERE id = 101");
+
+jika (row != nol) {
+    cetak("Nama Produk: " + row.nama_produk);
+    cetak("Harga: Rp" + row["harga"]);
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Handling JSON Column -->
+        <section id="json">
+            <h2>🧾 Pengelolaan Kolom JSON MySQL</h2>
+            <p>Modul MySQL PAHAT mengembalikan nilai string dari kolom berjenis `JSON` yang dapat dikonversi menjadi Object atau Array bawaan menggunakan pustaka <code>baca_json()</code>.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>row = mysql.fetch_one(db, "SELECT profil_json FROM pengguna WHERE id = 1");
+
+// Objek JSON terurai otomatis
+profil = baca_json(row.profil_json);
+cetak("Kota Asal: " + profil.alamat.kota);</code></pre>
+            </div>
+        </section>
+
+        <!-- Connection Pooling -->
+        <section id="fungsi">
+            <h2>⚙️ Connection Pooling</h2>
+            <p>Modul menyediakan fitur *connection pool* untuk efisiensi koneksi berulang pada aplikasi web berskala besar.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>// Membuat pool koneksi
+pool = mysql.create_pool({
+    "host": "localhost",
+    "user": "root",
+    "pass": "password",
+    "db": "toko",
+    "max_connections": 10
+});
+
+// Meminjam koneksi aktif dari pool
+koneksi_aktif = mysql.get_connection(pool);
+
+// Mengembalikan koneksi ke pool setelah selesai
+mysql.release_connection(pool, koneksi_aktif);</code></pre>
+            </div>
+        </section>
+
+        <!-- Multi-Thread Driver -->
+        <section id="modul">
+            <h2>🧵 Thread-Safe MySQL Driver</h2>
+            <p>Modul MySQL PAHAT mendukung penggunaan *multithreading* yang dikombinasikan dengan modul bawaan <code>thread</code>.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "thread";
+impor "mysql";
+
+fungsi proses_sync_db(id_tugas) {
+    db_local = mysql.connect("localhost", "root", "", "db_tes", 3306);
+    mysql.query(db_local, "INSERT INTO log (pesan) VALUES ('Proses " + id_tugas + "')");
+    mysql.close(db_local);
+}
+
+t1 = thread.buat("proses_sync_db", "1");
+t2 = thread.buat("proses_sync_db", "2");
+
+thread.gabung(t1);
+thread.gabung(t2);</code></pre>
+            </div>
+        </section>
+
+        <!-- Standard Library / Referensi API -->
+        <section id="core-builtin">
+            <h2>📚 Referensi API Modul MySQL</h2>
+            <h3>🧠 Ringkasan Fungsi Utama</h3>
+            <p>Daftar lengkap fungsi bawaan modul <code>mysql</code> sesuai binding C terdaftar:</p>
+            <ul>
+                <li><code>mysql.connect(host, user, pass, db, port)</code> — Membuka koneksi baru.</li>
+                <li><code>mysql.connect_options(config_object)</code> — Membuka koneksi berbasis konfigurasi objek.</li>
+                <li><code>mysql.query(db, sql)</code> — Menjalankan query SQL mentah.</li>
+                <li><code>mysql.fetch(db, sql)</code> — Mengambil seluruh baris data sebagai Array of Object.</li>
+                <li><code>mysql.fetch_one(db, sql)</code> — Mengambil 1 baris pertama hasil query sebagai Object.</li>
+                <li><code>mysql.error(db)</code> — Mengembalikan pesan kesalahan SQL terakhir.</li>
+                <li><code>mysql.errno(db)</code> — Mengembalikan kode nomor kesalahan SQL terakhir.</li>
+                <li><code>mysql.last_id(db)</code> — Mengembalikan ID auto-increment dari insert terakhir.</li>
+                <li><code>mysql.affected_rows(db)</code> — Mengembalikan jumlah baris yang terpengaruh.</li>
+                <li><code>mysql.ping(db)</code> — Memeriksa status koneksi server.</li>
+                <li><code>mysql.select_db(db, db_name)</code> — Mengubah database aktif.</li>
+                <li><code>mysql.close(db)</code> — Memutuskan dan menutup koneksi.</li>
+                <li><code>mysql.create_pool(config)</code> — Membuat pool koneksi database.</li>
+                <li><code>mysql.get_connection(pool)</code> — Mengambil 1 koneksi aktif dari pool.</li>
+                <li><code>mysql.release_connection(pool, db)</code> — Mengembalikan koneksi ke dalam pool.</li>
+            </ul>
+        </section>
+
+        <section id="std-math">
+            <h2>🔌 Function <code>mysql.connect()</code></h2>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>// Sintaks: mysql.connect(host, user, pass, db_name, port) -> Integer (Pointer) / NULL
+db = mysql.connect("127.0.0.1", "root", "secret", "my_db", 3306);</code></pre>
+            </div>
+        </section>
+
+        <section id="std-string">
+            <h2>🔍 Function <code>mysql.query()</code></h2>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>// Sintaks: mysql.query(handler, sql_string) -> Boolean
+berhasil = mysql.query(db, "UPDATE produk SET stok = 50 WHERE id = 12");</code></pre>
+            </div>
+        </section>
+
+        <section id="std-file">
+            <h2>📦 Function <code>mysql.fetch()</code> & <code>mysql.fetch_one()</code></h2>
+            <p><code>mysql.fetch()</code> mengambil seluruh baris data sebagai array objek, sedangkan <code>mysql.fetch_one()</code> mengambil 1 baris pertama sebagai objek tunggal.</p>
+        </section>
+
+        <section id="std-os">
+            <h2>🔢 Function <code>mysql.last_id()</code></h2>
+            <p>Mengembalikan ID bertipe integer yang dihasilkan oleh kolom `AUTO_INCREMENT` pada operasi `INSERT` terakhir.</p>
+        </section>
+
+        <section id="std-time">
+            <h2>✅ Function <code>mysql.affected_rows()</code></h2>
+            <p>Mengembalikan jumlah baris yang termodifikasi oleh perintah `INSERT`, `UPDATE`, atau `DELETE` terakhir.</p>
+        </section>
+
+        <section id="std-thread">
+            <h2>📋 Transaksi SQL</h2>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>mysql.query(db, "START TRANSACTION");
+// Operasi SQL...
+mysql.query(db, "COMMIT");
+// Atau jika gagal:
+mysql.query(db, "ROLLBACK");</code></pre>
+            </div>
+        </section>
+        
+        <section id="std-http">
+            <h2>❌ Function <code>mysql.close()</code></h2>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>// Memutuskan sambungan dari server MySQL
+mysql.close(db);</code></pre>
+            </div>
+        </section>
+
+        <!-- Contoh Program Lengkap -->
+        <section id="contoh-lengkap">
+            <h2>🧪 Skrip Studi Kasus CRUD Lengkap</h2>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "mysql";
+
+// 1. Inisialisasi Koneksi
+db = mysql.connect("localhost", "root", "", "pahat_db", 3306);
+
+jika (!db) {
+    cetak("Koneksi gagal: " + mysql.error());
+    os.exit(1);
+}
+
+cetak("=== APP PENGELOLAAN INVENTARIS PAHAT ===");
+
+// 2. Buat Tabel Produk
+mysql.query(db, "CREATE TABLE IF NOT EXISTS barang (id INT AUTO_INCREMENT PRIMARY KEY, nama VARCHAR(50), harga INT)");
+
+// 3. Tambah Barang Baru (Create)
+sql_add = "INSERT INTO barang (nama, harga) VALUES ('Laptop PAHAT Pro', 15000000)";
+mysql.query(db, sql_add);
+id_barang = mysql.last_id(db);
+cetak("Barang ditambahkan dengan ID: " + id_barang);
+
+// 4. Baca Semua Barang (Read)
+cetak("--- DAFTAR BARANG ---");
+items = mysql.fetch(db, "SELECT * FROM barang");
+ulang (i = 0; i < panjang(items); i++) {
+    item = items[i];
+    cetak("#" + item.id + " " + item.nama + " - Rp" + item.harga);
+}
+
+// 5. Perbarui Harga Barang (Update)
+mysql.query(db, "UPDATE barang SET harga = 14000000 WHERE id = " + id_barang);
+cetak("Harga barang ID " + id_barang + " berhasil diperbarui!");
+
+// 6. Tutup Koneksi
+mysql.close(db);
+cetak("Koneksi ke MySQL ditutup secara aman.");</code></pre>
+            </div>
+        </section>
+
+        <!-- Lisensi -->
+        <section id="lisensi">
+            <h2>📜 Lisensi Modul</h2>
+            <p>Modul MySQL PAHAT-Lang didistribusikan di bawah lisensi terbuka <strong>MIT License</strong>.</p>
+        </section>
+
+    </main>
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/translator.js"></script>
+</body>
+</html>
