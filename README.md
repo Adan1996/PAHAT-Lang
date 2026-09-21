@@ -31,7 +31,7 @@ Bahasa ini dibuat dengan tujuan menghadirkan pendekatan alternatif dalam mempela
 | **Nama**           | PAHAT Programming Language                                     |
 | **Kepanjangan**    | Pemrograman Analitis Berbasis Heuristik dan Arsitektur Terpadu |
 | **Pembuat**        | Syahdan Masyhuri                                               |
-| **Versi**          | 2.5.1                                                          |
+| **Versi**          | 2.5.2                                                          |
 | **Status**         | Development                                                    |
 | **Ekstensi File**  | `.pahat`                                                       |
 | **Bahasa Sintaks** | Bahasa Indonesia                                               |
@@ -1033,7 +1033,7 @@ cetak(os.cwd());
 
 ## `os.getenv()`
 
-Membaca environment variable.
+Membaca environment variable dari sistem operasi atau secara otomatis memuat variabel dari berkas `.env` yang berada di *root working directory* (CWD).
 
 ```pahat
 impor "os";
@@ -1043,7 +1043,43 @@ path = os.getenv("PATH");
 cetak(path);
 ```
 
-Jika environment variable tidak tersedia, fungsi mengembalikan `nol`.
+Jika environment variable tidak ditemukan baik di sistem maupun di berkas `.env`, fungsi mengembalikan `nol`.
+
+### Fitur Auto-Load `.env` (Dotenv Support)
+
+Saat `os.getenv()` dipanggil pertama kali, module `os` akan secara otomatis membaca dan memuat variabel lingkungan dari berkas `.env` (jika berkas tersebut ada).
+
+**Ketentuan Format `.env`:**
+* Format standar `KEY=VALUE`.
+* Mendukung *prefix* `export ` (contoh: `export DB_PORT=3306`).
+* Mendukung tanda petik ganda (`"..."`) atau tunggal (`'...'`) pada nilai (akan di-strip secara otomatis).
+* Mendukung komentar baris (`#` atau `//`) dan *inline comment* (contoh: `DEBUG=true # aktifkan debug`).
+* Variabel lingkungan bawaan OS (*system environment*) memiliki prioritas lebih tinggi dibanding berkas `.env`.
+
+**Contoh Berkas `.env`:**
+
+```env
+# Konfigurasi Aplikasi
+PORT=8080
+DB_HOST="localhost"
+export DB_PORT=3306
+APP_SECRET='rahasia123'
+DEBUG=true # Mode pengujian
+```
+
+**Penggunaan di PAHAT:**
+
+```pahat
+impor "os";
+
+port = os.getenv("PORT");
+db = os.getenv("DB_HOST");
+secret = os.getenv("APP_SECRET");
+
+cetak("Port: " + port);     // Output: Port: 8080
+cetak("DB Host: " + db);    // Output: DB Host: localhost
+cetak("Secret: " + secret); // Output: Secret: rahasia123
+```
 
 ## `os.platform()`
 

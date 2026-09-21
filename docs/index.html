@@ -6,7 +6,7 @@
     <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico">
     <title>PAHAT Programming Language - Documentation Guide</title>
     <meta name="title" content="PAHAT-Lang - Bahasa Pemrograman Berbasis Bahasa Indonesia">
-    <meta name="description" content="PAHAT (Pemrograman Analitis Berbasis Heuristik dan Arsitektur Terpadu) adalah bahasa pemrograman expressive & lightweight berbasis bahasa Indonesia. Unduh interpreter v2.5.1.">
+    <meta name="description" content="PAHAT (Pemrograman Analitis Berbasis Heuristik dan Arsitektur Terpadu) adalah bahasa pemrograman expressive & lightweight berbasis bahasa Indonesia. Unduh interpreter v2.5.2.">
     <meta name="keywords" content="PAHAT, PAHAT-Lang, bahasa pemrograman indonesia, interpreter PAHAT, koding bahasa indonesia, programming language local">
     <meta name="robots" content="index, follow">
 
@@ -14,7 +14,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://adan1996.github.io/PAHAT-Lang/">
     <meta property="og:title" content="PAHAT-Lang - Bahasa Pemrograman Berbasis Bahasa Indonesia">
-    <meta property="og:description" content="Interpreter bahasa pemrograman PAHAT v2.5.1. Unduh untuk Windows & Linux.">
+    <meta property="og:description" content="Interpreter bahasa pemrograman PAHAT v2.5.2. Unduh untuk Windows & Linux.">
     <meta property="og:image" content="https://adan1996.github.io/PAHAT-Lang/assets/img/pahat.jpg">
     <!-- Font Inter & Fira Code untuk tampilan modern & developer-friendly -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,7 @@
                 </div>
                 <div>
                     <div class="brand-title">PAHAT</div>
-                    <div class="brand-subtitle">v2.5.1 Docs</div>
+                    <div class="brand-subtitle">v2.5.2 Docs</div>
                 </div>
             </div>
             <div class="lang-switch-wrapper">
@@ -107,10 +107,17 @@
         </div>
         
         <div class="nav-group">
-            <div class="nav-title">Database</div>
-            <ul class="nav-links">
-                <li><a href="/PAHAT-Lang/database/mysql.html" target="_blank"><i class="fa-solid fa-database"></i> MySQL</a></li>
-            </ul>
+            <details class="nav-accordion">
+                <summary class="nav-title accordion-header">
+                    <span><i class="fa-solid fa-database"></i> Database</span>
+                    <i class="fa-solid fa-chevron-down arrow-icon"></i>
+                </summary>
+                <ul class="nav-links accordion-content">
+                    <li>
+                        <a href="/PAHAT-Lang/database/mysql.html" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> MySQL</a>
+                    </li>
+                </ul>
+            </details>
         </div>
 
         <!-- Group Extension dengan Expand/Collapse -->
@@ -122,7 +129,7 @@
                 </summary>
                 <ul class="nav-links accordion-content">
                     <li>
-                        <a href="https://github.com/Adan1996/PAHAT-Lang/releases/download/v2.5.1/PAHAT-Lang-0.0.1.vsix" target="_blank" rel="noopener">
+                        <a href="https://github.com/Adan1996/PAHAT-Lang/releases/download/v2.5.2/PAHAT-Lang-0.0.1.vsix" target="_blank" rel="noopener">
                             <i class="fa-custom-vscode"></i> Visual Studio Code
                         </a>
                     </li>
@@ -156,16 +163,16 @@
         <div class="hero">
             <img src="./assets/img/header.jpg" alt="PAHAT Logo" class="hero-logo">
 
-            <span class="hero-badge">Documentation Guide v2.5.1</span>
+            <span class="hero-badge">Documentation Guide v2.5.2</span>
             <h1>🚀 PAHAT Programming Language</h1>
             <p><strong>PAHAT (Pemrograman Analitis Berbasis Heuristik dan Arsitektur Terpadu)</strong> adalah bahasa pemrograman <strong>expressive & lightweight</strong> dengan sintaks intuitif berbasis bahasa Indonesia.</p>
             
             <!-- Container Tombol Download -->
             <div class="download-container">
-                <a href="https://github.com/Adan1996/PAHAT-Lang/releases/download/v2.5.1/pahat-windows-x86_64.zip" class="btn-download btn-windows" target="_blank" rel="noopener">
+                <a href="https://github.com/Adan1996/PAHAT-Lang/releases/download/v2.5.2/pahat-windows-x86_64.zip" class="btn-download btn-windows" target="_blank" rel="noopener">
                     <i class="fa-brands fa-windows"></i> Download for Windows
                 </a>
-                <a href="https://github.com/Adan1996/PAHAT-Lang/releases/download/v2.5.1/pahat-linux-x86_64.tar.gz" class="btn-download btn-linux" target="_blank" rel="noopener">
+                <a href="https://github.com/Adan1996/PAHAT-Lang/releases/download/v2.5.2/pahat-linux-x86_64.tar.gz" class="btn-download btn-linux" target="_blank" rel="noopener">
                     <i class="fa-brands fa-linux"></i> Download for Linux
                 </a>
             </div>
@@ -201,7 +208,7 @@
                     <tr><td><strong>Nama</strong></td><td>PAHAT Programming Language</td></tr>
                     <tr><td><strong>Kepanjangan</strong></td><td>Pemrograman Analitis Berbasis Heuristik dan Arsitektur Terpadu</td></tr>
                     <tr><td><strong>Pembuat</strong></td><td>Syahdan Masyhuri</td></tr>
-                    <tr><td><strong>Versi</strong></td><td>2.5.1</td></tr>
+                    <tr><td><strong>Versi</strong></td><td>2.5.2</td></tr>
                     <tr><td><strong>Status</strong></td><td>Development</td></tr>
                     <tr><td><strong>Ekstensi File</strong></td><td><code>.pahat</code></td></tr>
                     <tr><td><strong>Bahasa Sintaks</strong></td><td>Bahasa Indonesia</td></tr>
@@ -411,7 +418,7 @@ nama = "Syahdan"; // Ini juga komentar satu baris</code></pre>
             <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
             <pre><code class="language-pahat">/*
 Dokumentasi Fungsi Utama
-PAHAT Programming Language v2.5.1
+PAHAT Programming Language v2.5.2
 Dibuat oleh: Adan
 */
 fungsi utama() {
@@ -637,17 +644,215 @@ cetak(string.kecil(teks));</code></pre>
 
         <section id="std-file">
             <h2>📁 Module <code>file</code></h2>
-            <p>Menyediakan operasi file: <code>file.ada()</code>, <code>file.baca()</code>, <code>file.tulis()</code>, <code>file.tambah()</code>, <code>file.hapus()</code>, dan <code>file.ukuran()</code>.</p>
+            <p>Module <code>file</code> menyediakan operasi dasar untuk file.</p>
+            <p>Import:</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "file";</code></pre>
+            </div>
+
+            <h3><code>file.ada()</code></h3>
+            <p>Memeriksa apakah sebuah file tersedia. Mengembalikan <code>true</code> atau <code>false</code>.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "file";
+
+cetak(file.ada("data.txt"));</code></pre>
+            </div>
+
+            <h3><code>file.baca()</code></h3>
+            <p>Membaca seluruh isi file sebagai string. Jika file tidak dapat dibaca, fungsi mengembalikan <code>nol</code>.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "file";
+
+isi = file.baca("data.txt");
+
+cetak(isi);</code></pre>
+            </div>
+
+            <h3><code>file.tulis()</code></h3>
+            <p>Menulis isi baru ke file. Mengembalikan <code>true</code> jika operasi berhasil.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "file";
+
+berhasil = file.tulis(
+    "data.txt",
+    "Halo PAHAT!"
+);
+
+cetak(berhasil);</code></pre>
+            </div>
+
+            <h3><code>file.tambah()</code></h3>
+            <p>Menambahkan isi ke akhir file.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "file";
+
+file.tambah(
+    "data.txt",
+    "\nBaris kedua."
+);</code></pre>
+            </div>
+
+            <h3><code>file.hapus()</code></h3>
+            <p>Menghapus file.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "file";
+
+berhasil = file.hapus("data.txt");
+
+cetak(berhasil);</code></pre>
+            </div>
+
+            <h3><code>file.ukuran()</code></h3>
+            <p>Mengembalikan ukuran file dalam byte. Jika file tidak ditemukan, fungsi mengembalikan <code>-1</code>.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "file";
+
+ukuran = file.ukuran("data.txt");
+
+cetak(ukuran);</code></pre>
+            </div>
         </section>
 
         <section id="std-os">
             <h2>💻 Module <code>os</code></h2>
-            <p>Menyediakan operasi sistem: <code>os.cwd()</code>, <code>os.getenv()</code>, <code>os.platform()</code>, <code>os.env()</code>, dan <code>os.exit()</code>.</p>
+            <p>Module <code>os</code> menyediakan fungsi yang berhubungan dengan environment dan sistem operasi.</p>
+            <p>Import:</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "os";</code></pre>
+            </div>
+
+            <h3><code>os.cwd()</code></h3>
+            <p>Mengembalikan current working directory.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "os";
+
+cetak(os.cwd());</code></pre>
+            </div>
+
+            <h3><code>os.getenv()</code></h3>
+            <p>Membaca environment variable dari sistem operasi atau secara otomatis memuat variabel dari berkas <code>.env</code> yang berada di <em>root working directory</em> (CWD). Jika environment variable tidak ditemukan baik di sistem maupun di berkas <code>.env</code>, fungsi mengembalikan <code>nol</code>.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "os";
+
+path = os.getenv("PATH");
+
+cetak(path);</code></pre>
+            </div>
+
+            <h4>Fitur Auto-Load <code>.env</code> (Dotenv Support)</h4>
+            <p>Saat <code>os.getenv()</code> dipanggil pertama kali, module <code>os</code> akan secara otomatis membaca dan memuat variabel lingkungan dari berkas <code>.env</code> (jika berkas tersebut ada).</p>
+            <p><strong>Ketentuan Format <code>.env</code>:</strong></p>
+            <ul>
+                <li>Format standar <code>KEY=VALUE</code>.</li>
+                <li>Mendukung <em>prefix</em> <code>export </code> (contoh: <code>export DB_PORT=3306</code>).</li>
+                <li>Mendukung tanda petik ganda (<code>"..."</code>) atau tunggal (<code>'...'</code>) pada nilai.</li>
+                <li>Mendukung komentar baris (<code>#</code> atau <code>//</code>) dan <em>inline comment</em>.</li>
+                <li>Variabel lingkungan bawaan OS memiliki prioritas lebih tinggi dibanding berkas <code>.env</code>.</li>
+            </ul>
+            <p><strong>Contoh penggunaan dengan <code>.env</code>:</strong></p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "os";
+
+port = os.getenv("PORT");
+db = os.getenv("DB_HOST");
+secret = os.getenv("APP_SECRET");
+
+cetak("Port: " + port);
+cetak("DB Host: " + db);
+cetak("Secret: " + secret);</code></pre>
+            </div>
+
+            <h3><code>os.platform()</code></h3>
+            <p>Mengembalikan platform yang sedang digunakan (<code>windows</code>, <code>linux</code>, atau <code>macos</code>).</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "os";
+
+cetak(os.platform());</code></pre>
+            </div>
+
+            <h3><code>os.env()</code></h3>
+            <p>Membuat atau mengubah environment variable.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "os";
+
+berhasil = os.env(
+    "PAHAT_MODE",
+    "development"
+);
+
+cetak(berhasil);</code></pre>
+            </div>
+
+            <h3><code>os.exit()</code></h3>
+            <p>Mengakhiri proses PAHAT dengan exit code tertentu.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "os";
+
+os.exit(0);</code></pre>
+            </div>
+            <p><strong>Catatan:</strong> <code>os.exit()</code> menghentikan proses secara langsung. Hindari penggunaannya di tengah automated test kecuali memang ingin menguji exit process.</p>
         </section>
 
         <section id="std-time">
             <h2>⏱️ Module <code>time</code></h2>
-            <p>Menyediakan operasi waktu: <code>time.sekarang()</code>, <code>time.timestamp()</code>, dan <code>time.tidur()</code>.</p>
+            <p>Module <code>time</code> menyediakan fungsi waktu.</p>
+            <p>Import:</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "time";</code></pre>
+            </div>
+
+            <h3><code>time.sekarang()</code></h3>
+            <p>Mengembalikan waktu lokal saat ini dalam format <code>YYYY-MM-DD HH:MM:SS</code>.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "time";
+
+cetak(time.sekarang());</code></pre>
+            </div>
+
+            <h3><code>time.timestamp()</code></h3>
+            <p>Mengembalikan Unix timestamp.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "time";
+
+timestamp = time.timestamp();
+
+cetak(timestamp);</code></pre>
+            </div>
+
+            <h3><code>time.tidur()</code></h3>
+            <p>Menghentikan eksekusi selama sejumlah detik. Mendukung integer dan float. Nilai negatif tidak diperbolehkan.</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>impor "time";
+
+cetak("Mulai");
+
+time.tidur(1);
+
+cetak("Selesai");</code></pre>
+            </div>
+            <p>Dengan nilai desimal:</p>
+            <div class="code-container">
+                <div class="code-header"><span>PAHAT</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                <pre><code>time.tidur(0.5);</code></pre>
+            </div>
         </section>
 
         <section id="std-thread">
@@ -820,7 +1025,9 @@ pengguna = {
 };
 
 cetak("=== DATA PENGGUNA ===");
+
 cetak(pengguna.nama);
+cetak(pengguna.umur);
 cetak(string.besar(pengguna.nama));
 
 jika (pengguna.umur >= 18 && pengguna.aktif) {
@@ -830,15 +1037,62 @@ jika (pengguna.umur >= 18 && pengguna.aktif) {
 }
 
 cetak("=== MATEMATIKA ===");
+
+total_nilai = matematika.tambah(
+    pengguna.nilai[0],
+    pengguna.nilai[1]
+);
+
+cetak(total_nilai);
+
 hasil = math.pangkat(10, 2);
+
 cetak(hasil);
 
-cetak("=== FILE & OS ===");
+cetak("=== SWITCH ===");
+
+pilih (pengguna.umur) {
+
+    kasus 20: {
+        cetak("Berumur tepat 20 tahun");
+    }
+
+    bawaan: {
+        cetak("Umur lainnya");
+    }
+}
+
+cetak("=== FILE ===");
+
+nama_file = "data_pahat.txt";
+
+file.tulis(
+    nama_file,
+    "Halo dari PAHAT!"
+);
+
+cetak(file.ada(nama_file));
+
+isi = file.baca(nama_file);
+
+cetak(isi);
+
+file.hapus(nama_file);
+
+cetak("=== OS ===");
+
 cetak(os.platform());
-file.tulis("test.txt", "Hello PAHAT!");
+cetak(os.cwd());
+
+cetak("=== TIME ===");
+
+cetak(time.sekarang());
+cetak(time.timestamp());
 
 cetak("=== JSON ===");
+
 json_data = tulis_json(pengguna);
+
 cetak(json_data);</code></pre>
             </div>
         </section>
